@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, url_for, render_template, session
+from firebase_admin import credentials, firestore, initialize_app
 import pyodbc
 import numpy_financial as npf
 from datetime import timedelta
@@ -7,6 +8,11 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'your secret key'
+
+cred = credentials.Certificate('credentials.json')
+initialize_app(cred)
+
+db = firestore.client()
 
 def connect_to_database():
     Server = 'CHARLIE\MENTAL'
@@ -27,18 +33,16 @@ def login():
     email = request.form['email']
     password = request.form['password']
 
-    conexion = connect_to_database()
-    if conexion is not None:
-        cursor = conexion.cursor()
-        cursor.execute("SELECT * FROM Usuarios WHERE Correo_Electronico = ? AND Password = ?", (email, password))
-        user = cursor.fetchone()
-        if user is not None:
-            session['user_id'] = user.ID  
-            return redirect(url_for('home'))
-        else:
-            return "Invalid email or password"
+    users_ref = db.collection('Usuarios')
+    users = users_ref.where('Correo_Electronico', '==', email).where('Password', '==', password).stream()
+
+    user = next(users, None)
+    if user is not None:
+        session['user_id'] = user.id
+        return redirect(url_for('home'))
     else:
-        return "Failed to connect to the database"
+        return "Invalid email or password"
+
 
 @app.route('/configurar', methods=['POST'])
 def configurar():
