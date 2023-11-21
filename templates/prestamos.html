@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mis Préstamos</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; 
+            gap: 20px; 
+            height: 100vh;
+        }
+        .card {
+            background-color: #F2E4DF; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #888888;
+        }
+        h2 {
+            color: #59341E;
+        }
+        p {
+            color: #59341E; 
+        }
+        button[type="button"] {
+            background-color: #BF7256;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        input[type="submit"] {
+            background-color: #D95B5B; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"> 
+        {% for prestamo in prestamos %}
+        <div class="card"> 
+            <h2>Préstamo {{ prestamo.ID }}</h2>
+            <p>Tipo de Moneda: {{ prestamo.Tipo_Moneda }}</p>
+            <p>Tasa de Interés: {{ prestamo.Tasa }}% {{ prestamo.Tipo_Tasa_Interes }}</p>
+            <p>Plazo de Pago: {{ prestamo.Plazo_Pago }} meses</p>
+            <p>Fecha de Inicio: {{ prestamo.Fecha_inicio }}</p>
+            <p>Fecha de Vencimiento: {{ prestamo.Fecha_vencimiento }}</p>
+            <form action="/cuotas" method="post">
+                <input type="hidden" name="prestamo_id" value="{{ prestamo.ID }}">
+                <input type="submit" value="Ver Cuotas">
+            </form>
+            <form action="/eliminar_prestamo" method="post">
+                <input type="hidden" name="prestamo_id" value="{{ prestamo.ID }}">
+                <input type="submit" value="Eliminar">
+            </form>        
+        </div>
+        {% endfor %}
+        <button type="button" onclick="location.href='/home'">Regresar</button> 
+    </div>
+</body>
+</html>

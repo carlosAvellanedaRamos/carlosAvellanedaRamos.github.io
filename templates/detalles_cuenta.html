@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles de la Cuenta</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        table {
+            background-color: #F2E4DF; 
+            border-collapse: collapse;
+            border: 1px solid #888888;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #888888;
+            text-align: center;
+        }
+        th {
+            background-color: #BF7256;
+            color: white;
+        }
+        h1 {
+            text-align: center; 
+            margin-bottom: 20px;
+            color: #59341E; 
+        }
+        p {
+            text-align: center; 
+            color: #59341E;
+        }
+        td {
+            display: block;
+        }
+        th {
+            display: none; 
+        }
+        td:before {
+            content: attr(data-label);
+            font-weight: bold; 
+            float: left;
+        }
+        button[type="button"] {
+            background-color: #BF7256;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detalles de la Cuenta</h1> 
+    <div class="container">
+        {% if detalles %}
+        <table>
+            {% for detalle in detalles %}
+            <tr>
+                <td data-label="ID">{{ detalle.ID }}</td>
+                <td data-label="Usuarios_ID">{{ detalle.Usuarios_ID }}</td>
+                <td data-label="Nombre">{{ detalle.Nombre }}</td>
+                <td data-label="Apellido">{{ detalle.Apellido }}</td>
+                <td data-label="DNI">{{ detalle.DNI }}</td>
+                <td data-label="Telefono">{{ detalle.Telefono }}</td>
+                <td data-label="Direccion">{{ detalle.Direccion }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No se encontraron detalles de la cuenta.</p>
+        {% endif %}
+        <button type="button" onclick="location.href='/home'">Regresar</button> 
+    </div>
+</body>
+</html>
+

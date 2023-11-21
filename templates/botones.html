@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Préstamos Vehiculares</title>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #BF7256; 
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+        .button:hover {background-color: #D95B5B}
+
+        .button:active {
+            background-color: #D95B5B; 
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; 
+            gap: 20px; 
+            height: 100vh;
+        }
+        button[type="button"] {
+            background-color: #BF7256;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 40px; 
+            color: #59341E; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container"> 
+        <h2>Bienvenido a la Calculadora de Préstamos Vehiculares</h2>
+        <button class="button" onclick="location.href='/configuracion'">Configuracion</button>
+        <button class="button" onclick="location.href='/Calculadora'">Calculadora</button>
+        <button class="button" onclick="location.href='/prestamos'">Ver Préstamos Pendientes</button>
+        <button class="button" onclick="location.href='/detalles_cuenta'">Detalles de la Cuenta</button>
+    </div>
+</body>
+</html>

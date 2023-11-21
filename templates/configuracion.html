@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Configuración</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background-color: #F2E4DF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #888888;
+        }
+        label {
+            font-weight: bold;
+            color: #59341E;
+        }
+        select {
+            margin-bottom: 10px; 
+        }
+        input[type="submit"] {
+            background-color: #D95B5B; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button[type="button"] {
+            background-color: #BF7256;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #59341E; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div> 
+            <h2>Configuración</h2>
+            <form action="/configurar" method="post">
+                <label for="moneda_defecto">Moneda por defecto:</label><br>
+                <select id="moneda_defecto" name="moneda_defecto">
+                    <option value="soles" {% if configuracion.Moneda_Defecto == 'soles' %}selected{% endif %}>Soles</option>
+                    <option value="dolares" {% if configuracion.Moneda_Defecto == 'dolares' %}selected{% endif %}>Dólares</option>
+                </select><br>
+                <label for="tipo_tasa_interes_defecto">Tipo de Tasa de Interés por defecto:</label><br>
+                <select id="tipo_tasa_interes_defecto" name="tipo_tasa_interes_defecto">
+                    <option value="efectiva" {% if configuracion.Tipo_Tasa_Interes_Defecto == 'efectiva' %}selected{% endif %}>Efectiva</option>
+                    <option value="nominal" {% if configuracion.Tipo_Tasa_Interes_Defecto == 'nominal' %}selected{% endif %}>Nominal</option>
+                </select><br>
+                <label for="tiempo_tasa_interes">Tiempo de la Tasa de Interés:</label><br>
+                <select id="tiempo_tasa_interes" name="tiempo_tasa_interes">
+                    <option value="anual" {% if configuracion.Tiempo_Tasa_Interes == 'anual' %}selected{% endif %}>Anual</option>
+                    <option value="semestral" {% if configuracion.Tiempo_Tasa_Interes == 'semestral' %}selected{% endif %}>Semestral</option>
+                    <option value="trimestral" {% if configuracion.Tiempo_Tasa_Interes == 'trimestral' %}selected{% endif %}>Trimestral</option>
+                    <option value="bimestral" {% if configuracion.Tiempo_Tasa_Interes == 'bimestral' %}selected{% endif %}>Bimestral</option>
+                    <option value="mensual" {% if configuracion.Tiempo_Tasa_Interes == 'mensual' %}selected{% endif %}>Mensual</option>
+                </select><br>
+                <input type="submit" value="Guardar">
+                <button type="button" onclick="location.href='/home'">Regresar</button> 
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mis Cuotas</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px; 
+            height: 100vh;
+        }
+        .card {
+            background-color: #F2E4DF; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #888888;
+        }
+        h2 {
+            color: #59341E;
+        }
+        p {
+            color: #59341E; 
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px; 
+            color: #59341E;
+        }
+        button[type="button"] {
+            background-color: #BF7256; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mis Cuotas</h1> 
+    <div class="container"> 
+        <div class="card"> 
+            <h2>Indicadores Financieros</h2>
+            <p>TIR: {{ indicadores.TIR }}%</p>
+            {% if indicadores.VAN > 0 %}
+            <p>VAN: {{ indicadores.VAN }} (mayor que cero)</p>
+            {% elif indicadores.VAN < 0 %}
+            <p>VAN: {{ indicadores.VAN }} (menor que cero)</p>
+            {% else %}
+            <p>VAN: {{ indicadores.VAN }} (igual a cero)</p>
+            {% endif %}
+        </div>
+        {% for cuota in cuotas %}
+        <div class="card"> 
+            <h2>Cuota {{ cuota.Numero_Cuotas }}</h2>
+            <p>Fecha de Vencimiento: {{ cuota.Fecha_Vencimiento }}</p>
+            <p>Monto Principal: {{ cuota.Monto_Principal }}</p>
+            <p>Monto de Intereses: {{ cuota.Monto_Intereses }}</p>
+            <p>Monto Total de la Cuota: {{ cuota.Monto_Total_Cuota }}</p>
+        </div>
+        {% endfor %}
+        <button type="button" onclick="location.href='/home'">Regresar</button> 
+    </div>
+</body>
+</html>

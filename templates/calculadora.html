@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario de Préstamo</title>
+    <script>
+        function agregarPeriodoGracia() {
+            var contenedor = document.getElementById("periodos_gracia");
+            var periodo = document.createElement("div");
+            periodo.innerHTML = `
+                <label for="tipo_periodo">Tipo de periodo:</label><br>
+                <select id="tipo_periodo" name="tipo_periodo[]">
+                    <option value="parcial">Parcial</option>
+                    <option value="total">Total</option>
+                </select><br>
+                <label for="fecha_inicio_gracia">Fecha de inicio del periodo de gracia:</label><br>
+                <input type="date" id="fecha_inicio_gracia" name="fecha_inicio_gracia[]"><br>
+                <label for="fecha_fin_gracia">Fecha de fin del periodo de gracia:</label><br>
+                <input type="date" id="fecha_fin_gracia" name="fecha_fin_gracia[]"><br>
+                <button type="button" onclick="this.parentNode.remove()">Quitar periodo de gracia</button>
+                <hr>
+            `;
+            contenedor.appendChild(periodo);
+        }
+    </script>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background-color: #F2E4DF; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #888888;
+        }
+        label {
+            font-weight: bold;
+            color: #59341E;
+        }
+        select, input[type="number"], input[type="date"] {
+            margin-bottom: 10px; 
+        }
+        input[type="submit"] {
+            background-color: #D95B5B; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button[type="button"] {
+            background-color: #BF7256; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        h2 {
+            text-align: center; 
+            margin-bottom: 20px; 
+            color: #59341E; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div> 
+            <h2>Formulario de Préstamo</h2> 
+            <form action="/calcular" method="post">
+                <label for="monto">Monto del préstamo:</label><br>
+                <input type="number" id="monto" name="monto"><br>
+                <label for="tasa">Tasa de interés:</label><br>
+                <input type="number" id="tasa" name="tasa"><br>
+                <label for="moneda">Moneda:</label><br>
+                <select id="moneda" name="moneda">
+                    <option value="soles" {% if configuracion.Moneda_Defecto == 'soles' %}selected{% endif %}>Soles</option>
+                    <option value="dolares" {% if configuracion.Moneda_Defecto == 'dolares' %}selected{% endif %}>Dólares</option>
+                </select><br>
+                <label for="tipo_tasa">Tipo de Tasa:</label><br>
+                <select id="tipo_tasa" name="tipo_tasa">
+                    <option value="efectiva" {% if configuracion.Tipo_Tasa_Interes_Defecto == 'efectiva' %}selected{% endif %}>Efectiva</option>
+                    <option value="nominal" {% if configuracion.Tipo_Tasa_Interes_Defecto == 'nominal' %}selected{% endif %}>Nominal</option>
+                </select><br>
+                <label for="tiempo_tasa_interes">Tiempo de la Tasa de Interés:</label><br>
+                <select id="tiempo_tasa_interes" name="tiempo_tasa_interes">
+                    <option value="anual" {% if configuracion.Tiempo_Tasa_Interes == 'anual' %}selected{% endif %}>Anual</option>
+                    <option value="semestral" {% if configuracion.Tiempo_Tasa_Interes == 'semestral' %}selected{% endif %}>Semestral</option>
+                    <option value="trimestral" {% if configuracion.Tiempo_Tasa_Interes == 'trimestral' %}selected{% endif %}>Trimestral</option>
+                    <option value="bimestral" {% if configuracion.Tiempo_Tasa_Interes == 'bimestral' %}selected{% endif %}>Bimestral</option>
+                    <option value="mensual" {% if configuracion.Tiempo_Tasa_Interes == 'mensual' %}selected{% endif %}>Mensual</option>
+                </select><br>
+                <label for="fecha_inicial">Fecha inicial:</label><br>
+                <input type="date" id="fecha_inicial" name="fecha_inicial"><br>
+                <label for="fecha_final">Fecha final:</label><br>
+                <input type="date" id="fecha_final" name="fecha_final"><br>
+                <label for="pagos_anuales">Pagos por año:</label><br>
+                <input type="number" id="pagos_anuales" name="pagos_anuales"><br>
+                <input type="submit" value="Calcular">
+                <button type="button" onclick="agregarPeriodoGracia()">Agregar periodo de gracia</button>
+                <div id="periodos_gracia"></div>
+                </div>
+            </form>
+            <button type="button" onclick="location.href='/home'">Regresar</button> 
+        </div>
+    </div>
+</body>
+</html>

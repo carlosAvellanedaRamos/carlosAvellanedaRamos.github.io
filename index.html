@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background-color: #F2E4DF; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #888888;
+        }
+        label {
+            font-weight: bold;
+            color: #59341E;
+        }
+        input[type="email"], input[type="password"] {
+            margin-bottom: 20px; 
+        }
+        input[type="submit"] {
+            background-color: #D95B5B; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button {
+            background-color: #BF7256; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        h2 {
+            color: #59341E; 
+            margin-bottom: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container"> 
+        <div> 
+            <h2>Login</h2>
+            <form action="http://127.0.0.1:5000/login" method="post">
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br>
+                <label for="pwd">Password:</label><br>
+                <input type="password" id="pwd" name="password" required><br>
+                <input type="submit" value="Login">
+            </form>
+            <button onclick="location.href='http://127.0.0.1:5000/registerer'">Registrarse</button>
+        </div>
+    </div>
+</body>
+</html>
+
